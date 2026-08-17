@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.KeyEvent
 import android.view.accessibility.AccessibilityEvent
 import com.example.autoclicker.data.ConfigManager
+import java.lang.ref.WeakReference
 import com.example.autoclicker.util.NotificationUtils
 
 /**
@@ -195,14 +196,14 @@ class ClickerService : AccessibilityService() {
 
         /** 状态变化监听器，使用弱引用避免内存泄漏。 */
         @Volatile
-        private var stateListener: android.os.WeakReference<((Boolean) -> Unit)>? = null
+        private var stateListener: WeakReference<((Boolean) -> Unit)>? = null
 
         /** 获取当前服务实例（可能为 null）。 */
         fun getInstance(): ClickerService? = instance
 
         /** 注册/清除状态变化监听器。 */
         fun setStateListener(listener: ((Boolean) -> Unit)?) {
-            stateListener = listener?.let { android.os.WeakReference(it) }
+            stateListener = listener?.let { WeakReference(it) }
         }
     }
 }
