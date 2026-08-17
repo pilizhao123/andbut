@@ -116,15 +116,23 @@ class OverlayService : Service() {
             PermissionUtils.openAccessibilitySettings(this)
             return
         }
+        if (config.getClickPoints().isEmpty() && !service.isClicking()) {
+            Toast.makeText(this, R.string.toast_no_points, Toast.LENGTH_SHORT).show()
+            return
+        }
         service.toggleClicking()
         updateToggleUi(service.isClicking())
     }
 
-    /** 刷新按钮与状态文案。 */
+    /** 刷新按钮与状态文案，同时显示当前已配置点击点数量，便于排查。 */
     private fun updateToggleUi(running: Boolean) {
         if (!::btnToggle.isInitialized) return
+        val pointCount = config.getClickPoints().size
         btnToggle.setText(if (running) R.string.stop else R.string.start)
-        tvStatus.setText(if (running) R.string.status_running else R.string.status_idle)
+        tvStatus.text = getString(
+            if (running) R.string.status_running else R.string.status_idle,
+            pointCount
+        )
     }
 
     /** 让悬浮窗可通过顶部手柄拖动。 */

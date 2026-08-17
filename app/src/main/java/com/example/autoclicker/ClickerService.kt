@@ -5,6 +5,7 @@ import android.accessibilityservice.GestureDescription
 import android.graphics.Path
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.KeyEvent
 import android.view.accessibility.AccessibilityEvent
 import com.example.autoclicker.data.ConfigManager
@@ -60,10 +61,13 @@ class ClickerService : AccessibilityService() {
     /** 开始连点。若已在运行或没有坐标点则忽略。 */
     fun startClicking() {
         if (isRunning) return
-        if (config.getClickPoints().isEmpty()) {
+        val points = config.getClickPoints()
+        if (points.isEmpty()) {
+            Log.w(TAG, "没有点击点，无法开始")
             notifyStateChanged()
             return
         }
+        Log.d(TAG, "开始连点: ${points.size} 个点, interval=${config.getInterval()}ms, count=${config.getClickCount()}, loop=${config.isLoopEnabled()}")
         isRunning = true
         clickCount = 0
         currentIndex = 0
@@ -95,11 +99,13 @@ class ClickerService : AccessibilityService() {
         if (!isRunning) return
         val points = config.getClickPoints()
         if (points.isEmpty()) {
+            Log.w(TAG, "点击点为空，停止连点")
             stopClicking()
             return
         }
 
         val point = points[currentIndex.coerceIn(0, points.size - 1)]
+        Log.d(TAG, "第 ${clickCount + 1} 次点击: (${point.x}, ${point.y})")
         dispatchTap(point.x, point.y)
         clickCount++
 
@@ -126,20 +132,43 @@ class ClickerService : AccessibilityService() {
 
     /**
      * 在指定屏幕坐标注入一次 tap 手势。
-     * 使用 [GestureDescription] + [Path] 模拟一个时长极短的点击。
+     *
+     * 注意：为了让小米/华为/OPPO 等 ROM 稳定识别为一次“点击”而非被丢弃，Path 需要一段
+     * 非零长度的微小移动，且 StrokeDuration 不能太短（>= [TAP_DURATION]）。
      */
     private fun dispatchTap(x: Int, y: Int) {
-        if (x <= 0 || y <= 0) return
+        if (x <= 0 || y <= 0) {
+            Log.w(TAG, "非法坐标，跳过: x=$x, y=$y")
+            return
+        }
         try {
-            val path = Path()
-            path.moveTo(x.toFloat(), y.toFloat())
+            val path = Path().apply {
+                val fx = x.toFloat()
+                val fy = y.toFloat()
+                moveTo(fx, fy)
+                // 微小向下移动再回来，模拟真实点击；部分 ROM 对零长度手势会直接忽略
+                lineTo(fx + 1f, fy + 1f)
+                lineTo(fx, fy)
+            }
             val stroke = GestureDescription.StrokeDescription(path, 0, TAP_DURATION)
             val gesture = GestureDescription.Builder().addStroke(stroke).build()
-            // dispatchGesture 为异步执行，结果回调此处忽略
-            dispatchGesture(gesture, null, null)
+
+            dispatchGesture(
+                gesture,
+                object : GestureResultCallback() {
+                    override fun onCompleted(gestureDescription: GestureDescription?) {
+                        Log.d(TAG, "点击成功: ($x, $y)")
+                    }
+
+                    override fun onCancelled(gestureDescription: GestureDescription?) {
+                        Log.w(TAG, "点击被取消: ($x, $y)")
+                    }
+                },
+                null
+            )
         } catch (e: Exception) {
             // 关键 dispatch 必须捕获异常，避免服务崩溃
-            e.printStackTrace()
+            Log.e(TAG, "dispatchTap 异常: ($x, $y)", e)
         }
     }
 
@@ -185,10 +214,13 @@ class ClickerService : AccessibilityService() {
     }
 
     companion object {
+        private const val TAG = "ClickerService"
         private const val NOTIFICATION_ID = 1001
-        private const val TAP_DURATION: Long = 10
+        // 50ms 是一个比较兼顾“系统能识别为点击”和“不会太慢”的值；
+        // 某些 ROM 对 < 50ms 的手势会直接丢弃。
+        private const val TAP_DURATION: Long = 100
         private const val DOUBLE_PRESS_WINDOW = 500L
-        private const val MIN_INTERVAL = 10
+        private const val MIN_INTERVAL = 50
 
         /** 当前服务实例；服务销毁后置空，调用方必须判空。 */
         @Volatile

@@ -13,8 +13,8 @@
     <!-- 通用状态 -->
     <string name="start">开始</string>
     <string name="stop">停止</string>
-    <string name="status_running">运行中</string>
-    <string name="status_idle">空闲</string>
+    <string name="status_running">运行中(%1$d点)</string>
+    <string name="status_idle">空闲(%1$d点)</string>
     <string name="status_enabled">已开启</string>
     <string name="status_disabled">未开启</string>
 
@@ -28,6 +28,7 @@
     <string name="toast_enable_accessibility_first">请先在系统设置中开启无障碍服务</string>
     <string name="toast_overlay_required">请先授予悬浮窗权限</string>
     <string name="toast_point_added">已添加坐标点 (%1$d, %2$d)</string>
+    <string name="toast_no_points">请先添加至少一个点击点</string>
 
     <!-- 点击点列表 -->
     <string name="point_default_label">点 %1$d</string>
