@@ -1,0 +1,25 @@
+# Built application files
+*.apk
+*.aar
+*.war
+# Keep gradle wrapper jar (required to bootstrap the build)
+!gradle/wrapper/gradle-wrapper.jar
+
+# Gradle / build output
+.gradle/
+build/
+
+# Local configuration (SDK path, signing, etc)
+local.properties
+
+# Log / OS files
+*.log
+.DS_Store
+
+# Android Studio / IntelliJ
+*.iml
+.idea/
+captures/
+.externalNativeBuild
+.cxx/
+*.keystore

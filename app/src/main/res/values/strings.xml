@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用名 -->
+    <string name="app_name">自动连点器</string>
+
+    <!-- 无障碍服务描述（设置页展示） -->
+    <string name="accessibility_service_description">自动连点器需要无障碍服务权限，以便在任意界面模拟点击。</string>
+
+    <!-- 前台服务通知文案 -->
+    <string name="service_running">连点服务运行中</string>
+    <string name="overlay_running">悬浮控制窗运行中</string>
+
+    <!-- 通用状态 -->
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+    <string name="status_running">运行中</string>
+    <string name="status_idle">空闲</string>
+    <string name="status_enabled">已开启</string>
+    <string name="status_disabled">未开启</string>
+
+    <!-- 权限引导按钮 -->
+    <string name="btn_enable">去开启</string>
+    <string name="btn_grant">去授权</string>
+    <string name="btn_accessibility_disable_hint">前往关闭</string>
+    <string name="btn_overlay_disable_hint">前往关闭</string>
+
+    <!-- 提示 -->
+    <string name="toast_enable_accessibility_first">请先在系统设置中开启无障碍服务</string>
+    <string name="toast_overlay_required">请先授予悬浮窗权限</string>
+    <string name="toast_point_added">已添加坐标点 (%1$d, %2$d)</string>
+
+    <!-- 点击点列表 -->
+    <string name="point_default_label">点 %1$d</string>
+    <string name="point_info_format">%1$s　坐标(%2$d, %3$d)</string>
+    <string name="btn_delete">删除</string>
+    <string name="btn_add_point">添加点击点</string>
+
+    <!-- 设置区 -->
+    <string name="section_permissions">权限设置</string>
+    <string name="section_points">点击点列表</string>
+    <string name="section_settings">连点设置</string>
+    <string name="section_control">控制</string>
+
+    <string name="label_permission_accessibility">无障碍服务</string>
+    <string name="label_permission_overlay">悬浮窗权限</string>
+
+    <string name="label_interval">点击间隔</string>
+    <string name="hint_interval">输入毫秒</string>
+    <string name="interval_format">%1$d 毫秒</string>
+
+    <string name="label_count">点击次数（0 表示无限）</string>
+    <string name="hint_count">0 表示无限</string>
+
+    <string name="label_loop">循环模式（关闭则只执行一遍）</string>
+
+    <!-- 控制按钮 -->
+    <string name="btn_show_overlay">显示悬浮窗</string>
+    <string name="btn_hide_overlay">隐藏悬浮窗</string>
+    <string name="btn_settings">设置</string>
+
+    <!-- 坐标拾取层 -->
+    <string name="picker_hint">点击屏幕任意位置以记录坐标点</string>
+</resources>

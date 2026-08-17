@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6200EE</color>
+    <color name="primary_dark">#3700B3</color>
+    <color name="accent">#03DAC5</color>
+
+    <color name="background">#F5F5F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_on_surface">#FFFFFF</color>
+
+    <!-- 悬浮面板 -->
+    <color name="overlay_background">#CC000000</color>
+    <color name="overlay_border">#888888</color>
+    <color name="overlay_handle">#DDDDDD</color>
+
+    <!-- 坐标拾取层半透明背景 -->
+    <color name="picker_background">#66000000</color>
+
+    <!-- 启动图标背景（占位） -->
+    <color name="ic_launcher_background">#6200EE</color>
+</resources>

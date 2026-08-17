@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_overlay_panel"
+    android:padding="8dp">
+
+    <!-- 拖动手柄 -->
+    <View
+        android:id="@+id/overlay_drag_handle"
+        android:layout_width="40dp"
+        android:layout_height="6dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/overlay_handle"
+        android:layout_marginBottom="6dp" />
+
+    <TextView
+        android:id="@+id/tv_overlay_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/status_idle"
+        android:textColor="@color/text_on_surface"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="6dp">
+
+        <Button
+            android:id="@+id/btn_overlay_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            android:minWidth="48dp"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_overlay_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_settings"
+            android:minWidth="48dp"
+            android:textSize="12sp"
+            android:layout_marginStart="6dp" />
+    </LinearLayout>
+</LinearLayout>
