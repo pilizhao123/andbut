@@ -107,7 +107,7 @@
             android:layout_marginTop="@dimen/padding_small"
             android:text="@string/btn_add_point" />
 
-        <!-- 连点设置 -->
+        <!-- 运行方式 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,13 +120,198 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_small"
+            android:text="@string/label_run_mode"
+            android:textColor="@color/text_primary" />
+
+        <RadioGroup
+            android:id="@+id/rg_run_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_mode_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/run_mode_count"
+                android:textColor="@color/text_primary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp">
+
+                <EditText
+                    android:id="@+id/et_run_count"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/run_mode_count_hint"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/run_mode_count_hint"
+                    android:textColor="@color/text_primary" />
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/rb_mode_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/run_mode_duration"
+                android:textColor="@color/text_primary" />
+
+            <LinearLayout
+                android:id="@+id/layout_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp">
+
+                <EditText
+                    android:id="@+id/et_duration_min"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/hint_duration_min"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_duration_min"
+                    android:textColor="@color/text_primary" />
+
+                <EditText
+                    android:id="@+id/et_duration_sec"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/hint_duration_sec"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_duration_sec"
+                    android:textColor="@color/text_primary" />
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/rb_mode_manual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/run_mode_manual"
+                android:textColor="@color/text_primary" />
+        </RadioGroup>
+
+        <!-- 循环间隔 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
             android:text="@string/label_interval"
             android:textColor="@color/text_primary" />
 
-        <SeekBar
-            android:id="@+id/seek_interval"
+        <LinearLayout
+            android:id="@+id/layout_interval"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/et_interval_min"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/hint_interval_min"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_interval_min"
+                android:textColor="@color/text_primary" />
+
+            <EditText
+                android:id="@+id/et_interval_sec"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/hint_interval_sec"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_interval_sec"
+                android:textColor="@color/text_primary" />
+
+            <EditText
+                android:id="@+id/et_interval_ms"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/hint_interval_ms"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_interval_ms"
+                android:textColor="@color/text_primary" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_interval_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary" />
+
+        <!-- 运行速度 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:text="@string/label_speed"
+            android:textColor="@color/text_primary" />
+
+        <Spinner
+            android:id="@+id/spinner_speed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:background="@color/surface" />
+
+        <!-- 循环模式 -->
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_loop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:text="@string/label_loop" />
+
+        <!-- 高级设置 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:text="@string/section_advanced"
+            android:textColor="@color/primary"
+            android:textStyle="bold" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_random_offset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:text="@string/label_random_offset" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -134,43 +319,70 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tv_interval_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/text_primary" />
-
             <EditText
-                android:id="@+id/et_interval"
-                android:layout_width="120dp"
+                android:id="@+id/et_random_offset"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/hint_interval"
+                android:hint="@string/hint_random_offset"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_random_offset"
                 android:textColor="@color/text_primary" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_small"
-            android:text="@string/label_count"
-            android:textColor="@color/text_primary" />
-
-        <EditText
-            android:id="@+id/et_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/hint_count"
-            android:textColor="@color/text_primary" />
-
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_loop"
+            android:id="@+id/switch_auto_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_small"
-            android:text="@string/label_loop" />
+            android:text="@string/label_auto_start" />
+
+        <!-- 运行后自动停止 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/padding_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_stop_after"
+                android:textColor="@color/text_primary" />
+
+            <EditText
+                android:id="@+id/et_stop_after_min"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/hint_duration_min"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_duration_min"
+                android:textColor="@color/text_primary" />
+
+            <EditText
+                android:id="@+id/et_stop_after_sec"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/hint_duration_sec"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_stop_after_tail"
+                android:textColor="@color/text_primary" />
+        </LinearLayout>
 
         <!-- 控制 -->
         <TextView

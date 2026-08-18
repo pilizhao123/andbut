@@ -40,19 +40,42 @@
     <string name="section_permissions">权限设置</string>
     <string name="section_points">点击点列表</string>
     <string name="section_settings">连点设置</string>
+    <string name="section_advanced">高级设置</string>
     <string name="section_control">控制</string>
 
     <string name="label_permission_accessibility">无障碍服务</string>
     <string name="label_permission_overlay">悬浮窗权限</string>
 
     <string name="label_interval">点击间隔</string>
-    <string name="hint_interval">输入毫秒</string>
-    <string name="interval_format">%1$d 毫秒</string>
+    <string name="hint_interval_min">分</string>
+    <string name="hint_interval_sec">秒</string>
+    <string name="hint_interval_ms">毫秒</string>
+    <string name="interval_format">%1$d 分 %2$d 秒 %3$d 毫秒</string>
 
     <string name="label_count">点击次数（0 表示无限）</string>
     <string name="hint_count">0 表示无限</string>
 
     <string name="label_loop">循环模式（关闭则只执行一遍）</string>
+
+    <!-- 运行方式 -->
+    <string name="label_run_mode">运行方式</string>
+    <string name="run_mode_count">循环运行 %1$d 次</string>
+    <string name="run_mode_count_hint">次数</string>
+    <string name="run_mode_duration">循环运行总时长</string>
+    <string name="run_mode_manual">循环运行至手动停止</string>
+    <string name="hint_duration_min">分</string>
+    <string name="hint_duration_sec">秒</string>
+
+    <!-- 运行速度 -->
+    <string name="label_speed">运行速度</string>
+    <string name="speed_format">%1$.1fx</string>
+
+    <!-- 其他高级设置 -->
+    <string name="label_random_offset">运行时点击位置随机微调（模仿手动操作）</string>
+    <string name="hint_random_offset">像素</string>
+    <string name="label_auto_start">启动后自动运行</string>
+    <string name="label_stop_after">运行</string>
+    <string name="label_stop_after_tail">分  秒后自动停止</string>
 
     <!-- 控制按钮 -->
     <string name="btn_show_overlay">显示悬浮窗</string>
