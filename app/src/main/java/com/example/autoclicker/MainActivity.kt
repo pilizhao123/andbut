@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var etStopAfterSec: EditText
     private lateinit var btnToggleOverlay: Button
     private lateinit var btnStartClick: Button
+    private lateinit var tvMainClickCount: TextView
 
     private val speedOptions = listOf(0.5f, 1.0f, 2.0f, 5.0f, 10.0f)
 
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         refreshPermissionStatus()
         refreshClickState()
+        refreshClickCount()
         maybeAutoStart()
     }
 
@@ -117,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
         btnToggleOverlay = findViewById(R.id.btn_toggle_overlay)
         btnStartClick = findViewById(R.id.btn_start_click)
+        tvMainClickCount = findViewById(R.id.tv_main_click_count)
     }
 
     private fun setupRecyclerView() {
@@ -346,5 +349,12 @@ class MainActivity : AppCompatActivity() {
     private fun refreshClickState() {
         val running = ClickerService.getInstance()?.isClicking() ?: false
         btnStartClick.setText(if (running) R.string.stop else R.string.start)
+        refreshClickCount()
+    }
+
+    /** 刷新主界面"本次已点击 N 次"统计（运行结束后数值保留，直到下次开始清零）。 */
+    private fun refreshClickCount() {
+        val count = ClickerService.getInstance()?.getExecutedCount() ?: 0
+        tvMainClickCount.text = getString(R.string.main_click_count, count)
     }
 }

@@ -40,6 +40,18 @@ class OverlayService : Service() {
     private lateinit var btnToggle: Button
     private lateinit var btnSettings: Button
     private lateinit var tvStatus: TextView
+    private lateinit var tvClickCount: TextView
+
+    /** 点击次数轮询任务：运行中每 300ms 刷新悬浮窗计数。 */
+    private val countRunnable = object : Runnable {
+        override fun run() {
+            if (!::tvClickCount.isInitialized) return
+            val count = ClickerService.getInstance()?.getExecutedCount() ?: 0
+            tvClickCount.text = getString(R.string.overlay_click_count, count)
+            // 持续轮询，直到 stopCountPolling 移除
+            mainHandler.postDelayed(this, 300)
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -57,7 +69,7 @@ class OverlayService : Service() {
         }
         // 注册状态监听，及时同步连点状态（例如音量键触发的启停）
         ClickerService.setStateListener { running ->
-            mainHandler.post { updateToggleUi(running) }
+            mainHandler.post { applyRunningState(running) }
         }
         return START_STICKY
     }
@@ -70,8 +82,11 @@ class OverlayService : Service() {
         btnToggle = view.findViewById(R.id.btn_overlay_toggle)
         btnSettings = view.findViewById(R.id.btn_overlay_settings)
         tvStatus = view.findViewById(R.id.tv_overlay_status)
+        tvClickCount = view.findViewById(R.id.tv_overlay_click_count)
+        tvClickCount.text = getString(R.string.overlay_click_count, 0)
 
-        updateToggleUi(ClickerService.getInstance()?.isClicking() ?: false)
+        val initialRunning = ClickerService.getInstance()?.isClicking() ?: false
+        applyRunningState(initialRunning)
 
         btnToggle.setOnClickListener { onToggleClicked() }
         btnSettings.setOnClickListener {
@@ -121,11 +136,14 @@ class OverlayService : Service() {
             return
         }
         service.toggleClicking()
-        updateToggleUi(service.isClicking())
+        applyRunningState(service.isClicking())
     }
 
-    /** 刷新按钮与状态文案，同时显示当前已配置点击点数量，便于排查。 */
-    private fun updateToggleUi(running: Boolean) {
+    /**
+     * 统一处理运行态变化：刷新按钮/状态文案，并开启或停止点击次数轮询。
+     * 停止时保留最后一次计数，方便用户查看本次共点击多少次。
+     */
+    private fun applyRunningState(running: Boolean) {
         if (!::btnToggle.isInitialized) return
         val pointCount = config.getClickPoints().size
         btnToggle.setText(if (running) R.string.stop else R.string.start)
@@ -133,6 +151,18 @@ class OverlayService : Service() {
             if (running) R.string.status_running else R.string.status_idle,
             pointCount
         )
+        if (running) startCountPolling() else stopCountPolling()
+    }
+
+    /** 开始/继续点击次数轮询。 */
+    private fun startCountPolling() {
+        mainHandler.removeCallbacks(countRunnable)
+        mainHandler.post(countRunnable)
+    }
+
+    /** 停止点击次数轮询（保留最后显示的数值）。 */
+    private fun stopCountPolling() {
+        mainHandler.removeCallbacks(countRunnable)
     }
 
     /** 让悬浮窗可通过顶部手柄拖动。 */
@@ -167,6 +197,7 @@ class OverlayService : Service() {
 
     override fun onDestroy() {
         ClickerService.setStateListener(null)
+        stopCountPolling()
         overlayView?.let {
             try {
                 windowManager.removeView(it)

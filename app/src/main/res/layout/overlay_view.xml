@@ -24,6 +24,17 @@
         android:textColor="@color/text_on_surface"
         android:textSize="12sp" />
 
+    <TextView
+        android:id="@+id/tv_overlay_click_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:text="@string/overlay_click_count"
+        android:textColor="@color/primary"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

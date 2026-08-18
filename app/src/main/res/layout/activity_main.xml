@@ -393,6 +393,16 @@
             android:textColor="@color/primary"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_main_click_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:text="@string/main_click_count"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_subtitle"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/btn_toggle_overlay"
             android:layout_width="match_parent"

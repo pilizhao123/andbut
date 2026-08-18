@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 应用名 -->
-    <string name="app_name">自动连点器</string>
+    <string name="app_name">连点助手</string>
 
     <!-- 无障碍服务描述（设置页展示） -->
-    <string name="accessibility_service_description">自动连点器需要无障碍服务权限，以便在任意界面模拟点击。</string>
+    <string name="accessibility_service_description">连点助手需要无障碍服务权限，以便在任意界面模拟点击。</string>
 
     <!-- 前台服务通知文案 -->
     <string name="service_running">连点服务运行中</string>
@@ -17,6 +17,10 @@
     <string name="status_idle">空闲(%1$d点)</string>
     <string name="status_enabled">已开启</string>
     <string name="status_disabled">未开启</string>
+
+    <!-- 点击次数统计 -->
+    <string name="overlay_click_count">已点击 %1$d 次</string>
+    <string name="main_click_count">本次已点击 %1$d 次</string>
 
     <!-- 权限引导按钮 -->
     <string name="btn_enable">去开启</string>

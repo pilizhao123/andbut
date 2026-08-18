@@ -129,6 +129,9 @@ class ClickerService : AccessibilityService() {
     /** 当前是否正在连点。 */
     fun isClicking(): Boolean = isRunning
 
+    /** 本次连点已执行的真实点击次数（运行前/停止后保留最后一次数值）。 */
+    fun getExecutedCount(): Int = clickCount
+
     /**
      * 核心点击循环：每执行一次点击后，按用户设定的间隔延时再执行下一次。
      * 顺序遍历坐标点列表；到达末尾时依据「循环模式」与「次数」决定是否继续。
